@@ -15,9 +15,10 @@ resource "hcp_hvn" "hvn" {
 # Platform settings
 
 resource "hcp_vault_cluster" "vault" {
-  cluster_id = "${var.vault_id}-${random_pet.suffix.id}"
-  hvn_id     = hcp_hvn.hvn.hvn_id
-  tier       = var.vault_tier
+  cluster_id      = "${var.vault_id}-${random_pet.suffix.id}"
+  hvn_id          = hcp_hvn.hvn.hvn_id
+  tier            = var.vault_tier
+  public_endpoint = var.public_endpoint
 }
 
 resource "hcp_vault_cluster_admin_token" "admin" {
