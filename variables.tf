@@ -34,12 +34,12 @@ variable "vault_tier" {
 
 variable "public_endpoint" {
   description = "Enables a public endpoint"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "vault_namespace" {
   description = "Vault namespace to interact with. Defaults to admin"
-  type = string
-  default = "admin"
+  type        = string
+  default     = "admin"
 }

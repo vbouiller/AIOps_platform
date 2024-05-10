@@ -11,7 +11,7 @@ terraform {
     }
 
     vault = {
-      source = "hashicorp/vault"
+      source  = "hashicorp/vault"
       version = "3.25.0"
     }
 
@@ -22,7 +22,7 @@ terraform {
 provider "hcp" {}
 
 provider "vault" {
-  address = hcp_vault_cluster.vault.public_endpoint
-  token = hcp_vault_cluster_admin_token.admin.token
+  address   = hcp_vault_cluster.vault.public_endpoint
+  token     = hcp_vault_cluster_admin_token.admin.token
   namespace = var.vault_namespace
 }
