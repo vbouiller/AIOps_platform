@@ -10,17 +10,8 @@ terraform {
       version = "~> 0.88.0"
     }
 
-    datadog = {
-      source  = "DataDog/datadog"
-      version = "~> 3.39.0"
-    }
-
   }
 }
 
 
 provider "hcp" {}
-
-provider "datadog" {}
-
-provider "environment" {}
