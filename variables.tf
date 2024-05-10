@@ -31,3 +31,15 @@ variable "vault_tier" {
   type        = string
   default     = "plus_small"
 }
+
+variable "public_endpoint" {
+  description = "Enables a public endpoint"
+  type = bool
+  default = true
+}
+
+variable "vault_namespace" {
+  description = "Vault namespace to interact with. Defaults to admin"
+  type = string
+  default = "admin"
+}
