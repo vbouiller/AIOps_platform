@@ -36,7 +36,26 @@ resource "hcp_vault_secrets_secret" "vault_token" {
   secret_value = hcp_vault_cluster_admin_token.admin.token
 }
 
-data "http" "hvs_apps" {
-  url    = "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/${data.hcp_organization.org.resource_id}/projects/${data.hcp_project.project.resource_id}/apps"
+
+data "http" "hcp_api_token" {
+  url    = "https://auth.idp.hashicorp.com/oauth2/toke?${local.token_client_id}&${local.token_client_secret}&${local.token_end_url}"
   method = "GET"
+  request_headers = {
+    Content-Type = "application/x-www-form-urlencoded"
+  }
+}
+
+data "http" "hvs_apps" {
+  url    = "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/${data.hcp_organization.org.resource_id}/projects/${data.hcp_project.project.resource_id}/apps}"
+  method = "GET"
+
+  request_headers = {
+    "Authorization" = "Bearer ${data.http.hcp_api_token.response_body}"
+  }
+}
+
+locals {
+  token_client_id     = urlencode("client_id=${data.environment_sensitive_variable.hcp_client_id}")
+  token_client_secret = urlencode("client_secret=${data.environment_sensitive_variable.hcp_client_secret}")
+  token_end_url       = urlencode("grant_type=client_credentials&audience=https://api.hashicorp.cloud")
 }

@@ -14,3 +14,11 @@ output "proj_id" {
 output "answer" {
   value = data.http.hvs_apps.response_body
 }
+
+output "url" {
+  value = data.http.hcp_api_token.url
+}
+
+output "token_response" {
+  value = data.http.hcp_api_token.response_body
+}

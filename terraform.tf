@@ -20,6 +20,11 @@ terraform {
       version = "3.4.2"
     }
 
+    environment = {
+      source  = "MorganPeat/environment"
+      version = "0.2.6"
+    }
+
   }
 }
 
