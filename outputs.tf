@@ -4,5 +4,5 @@ output "vault_admin_token" {
 }
 
 output "answer" {
-  value = jsondecode(data.http.hvs_apps.response_body).apps[*].name
+  value = jsondecode(data.http.get_hvs_apps.response_body).apps[*].name
 }
