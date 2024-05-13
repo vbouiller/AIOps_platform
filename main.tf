@@ -39,7 +39,7 @@ resource "hcp_vault_secrets_secret" "vault_token" {
 
 data "http" "hcp_api_token" {
   url    = "https://auth.idp.hashicorp.com/oauth2/token?${local.token_client_id}&${local.token_client_secret}&${local.token_end_url}"
-  method = "GET"
+  method = "POST"
   request_headers = {
     Content-Type = "application/x-www-form-urlencoded"
   }
