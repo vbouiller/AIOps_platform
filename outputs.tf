@@ -4,11 +4,11 @@ output "vault_admin_token" {
 }
 
 output "org_id" {
-  value = data.hcp_organization.org.resource_id
+  value = data.hcp_organization.hcp_org.resource_id
 }
 
 output "proj_id" {
-  value = data.hcp_project.project.resource_id
+  value = data.hcp_project.hcp_project.resource_id
 }
 
 output "answer" {
