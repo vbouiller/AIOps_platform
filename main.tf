@@ -43,8 +43,7 @@ data "http" "hcp_api_token" {
   request_headers = {
     Content-Type = "application/x-www-form-urlencoded"
   }
-
-  request_body = "${local.token_client_id}&${local.token_client_secret}&${local.token_end_url}"
+  request_body = "${local.token_client_id}&${local.token_client_secret}&${local.token_grant_type}&${local.token_audience}"
 }
 
 data "http" "hvs_apps" {
@@ -59,5 +58,6 @@ data "http" "hvs_apps" {
 locals {
   token_client_id     = urlencode("client_id=${data.environment_sensitive_variable.hcp_client_id.value}")
   token_client_secret = urlencode("client_secret=${data.environment_sensitive_variable.hcp_client_secret.value}")
-  token_end_url       = urlencode("grant_type=client_credentials&audience=https://api.hashicorp.cloud")
+  token_grant_type    = urlencode("grant_type=client_credentials")
+  token_audience      = urlencode("audience=https://api.hashicorp.cloud")
 }
