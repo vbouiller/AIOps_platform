@@ -26,7 +26,8 @@ resource "hcp_vault_cluster_admin_token" "admin" {
 }
 
 resource "hcp_vault_secrets_app" "github_syns" {
-  app_name = var.hvs_app_name
+  app_name    = var.hvs_app_name
+  description = "test"
 }
 
 resource "hcp_vault_secrets_secret" "vault_token" {
