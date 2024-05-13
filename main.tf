@@ -35,3 +35,4 @@ resource "hcp_vault_secrets_secret" "vault_token" {
   secret_name  = "vault_token"
   secret_value = hcp_vault_cluster_admin_token.admin.token
 }
+
