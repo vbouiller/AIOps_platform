@@ -7,6 +7,12 @@ output "answer" {
   value = data.http.hvs_apps.response_body
 }
 
-output "token" {
-    value = jsondecode(data.http.hcp_api_token.response_body).access_token
+output "auth" {
+    value = data.http.hvs_apps.request_headers
+    sensitive = true
+}
+
+output "url" {
+  value = data.http.hvs_apps.url
+  sensitive = true
 }
