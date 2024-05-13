@@ -25,6 +25,6 @@ output "token_response" {
 }
 
 output "request" {
-  value = data.http.hcp_api_token.request_body
+  value     = data.http.hcp_api_token.request_body
   sensitive = true
 }
