@@ -8,11 +8,11 @@ output "answer" {
 }
 
 output "auth" {
-    value = data.http.hvs_apps.request_headers
-    sensitive = true
+  value     = data.http.hvs_apps.request_headers
+  sensitive = true
 }
 
 output "url" {
-  value = data.http.hvs_apps.url
+  value     = data.http.hvs_apps.url
   sensitive = true
 }

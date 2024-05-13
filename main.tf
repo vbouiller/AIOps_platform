@@ -47,13 +47,14 @@ data "http" "hcp_api_token" {
 }
 
 data "http" "hvs_apps" {
-  url    = "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/${data.hcp_organization.hcp_org.resource_id}/projects/${data.hcp_project.hcp_project.resource_id}/apps}"
+  #   url    = "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/${data.hcp_organization.hcp_org.resource_id}/projects/${data.hcp_project.hcp_project.resource_id}/apps}"
+  url    = "https://httpbin.org/Get"
   method = "GET"
   request_headers = {
-    Authorization = "Bearer ${local.hcp_api_token}"
+    Authorization = "Bearer aaaa" #${local.hcp_api_token}"
   }
 
-  depends_on = [ data.http.hcp_api_token ]
+  depends_on = [data.http.hcp_api_token]
 }
 
 locals {
