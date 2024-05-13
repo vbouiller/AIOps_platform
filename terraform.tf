@@ -15,6 +15,11 @@ terraform {
       version = "3.25.0"
     }
 
+    http = {
+      source  = "hashicorp/http"
+      version = "3.4.2"
+    }
+
   }
 }
 
@@ -26,3 +31,5 @@ provider "vault" {
   token     = hcp_vault_cluster_admin_token.admin.token
   namespace = var.vault_namespace
 }
+
+provider "http" {}

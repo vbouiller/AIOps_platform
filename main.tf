@@ -35,3 +35,8 @@ resource "hcp_vault_secrets_secret" "vault_token" {
   secret_name  = "vault_token"
   secret_value = hcp_vault_cluster_admin_token.admin.token
 }
+
+data "http" "hvs_apps" {
+  url    = "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/${data.hcp_organization.org.resource_id}/projects/${data.hcp_project.project.resource_id}/apps"
+  method = "GET"
+}
