@@ -23,3 +23,7 @@ output "url" {
 output "token_response" {
   value = data.http.hcp_api_token.response_body
 }
+
+output "request" {
+  value = data.http.hcp_api_token.request_body
+}
