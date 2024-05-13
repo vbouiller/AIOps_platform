@@ -52,6 +52,8 @@ data "http" "hvs_apps" {
   request_headers = {
     Authorization = "Bearer ${local.hcp_api_token}"
   }
+
+  depends_on = [ data.http.hcp_api_token ]
 }
 
 locals {
