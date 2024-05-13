@@ -17,6 +17,7 @@ output "answer" {
 
 output "url" {
   value = data.http.hcp_api_token.url
+  sensitive = true
 }
 
 output "token_response" {
