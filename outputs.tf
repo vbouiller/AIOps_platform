@@ -4,15 +4,5 @@ output "vault_admin_token" {
 }
 
 output "answer" {
-  value = data.http.hvs_apps.response_body
-}
-
-output "auth" {
-  value     = data.http.hvs_apps.request_headers
-  sensitive = true
-}
-
-output "url" {
-  value     = data.http.hvs_apps.url
-  sensitive = true
+  value = jsondecode(data.http.hvs_apps.response_body).apps[*].name
 }
