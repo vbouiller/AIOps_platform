@@ -43,7 +43,7 @@ data "http" "hcp_api_token" {
   request_headers = {
     Content-Type = "application/x-www-form-urlencoded"
   }
-  request_body = "${local.token_client_id}&${local.token_client_secret}&${local.token_grant_type}&${local.token_audience}"
+  request_body = "${local.token_client_id}&${local.token_client_secret}&grant_type=client_credentials&${local.token_audience}"
 }
 
 data "http" "hvs_apps" {
