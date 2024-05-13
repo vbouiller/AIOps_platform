@@ -43,3 +43,9 @@ variable "vault_namespace" {
   type        = string
   default     = "admin"
 }
+
+variable "hvs_app_name" {
+  description = "HCP Vault Secrets name for the app that will be synced with Github. Defaults to github_sync"
+  type        = string
+  default     = "githubsync"
+}
