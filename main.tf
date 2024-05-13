@@ -43,22 +43,17 @@ data "http" "hcp_api_token" {
   request_headers = {
     Content-Type = "application/x-www-form-urlencoded"
   }
-  #request_body = "${local.token_client_id}&${local.token_client_secret}&grant_type=client_credentials&${local.token_audience}"
   request_body = "client_id=${data.environment_sensitive_variable.hcp_client_id.value}&client_secret=${data.environment_sensitive_variable.hcp_client_secret.value}&grant_type=client_credentials&audience=https://api.hashicorp.cloud"
 }
 
 data "http" "hvs_apps" {
   url    = "https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/${data.hcp_organization.hcp_org.resource_id}/projects/${data.hcp_project.hcp_project.resource_id}/apps}"
   method = "GET"
-
   request_headers = {
-    "Authorization" = "Bearer ${data.http.hcp_api_token.response_body}"
+    Authorization = "Bearer ${local.hcp_api_token}"
   }
 }
 
 locals {
-  token_client_id     = urlencode("client_id=${data.environment_sensitive_variable.hcp_client_id.value}")
-  token_client_secret = urlencode("client_secret=${data.environment_sensitive_variable.hcp_client_secret.value}")
-  token_grant_type    = urlencode("grant_type=client_credentials")
-  token_audience      = urlencode("audience=https://api.hashicorp.cloud")
+  hcp_api_token = jsondecode(data.http.hcp_api_token.response_body).access_token
 }
