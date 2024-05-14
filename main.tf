@@ -32,7 +32,7 @@ resource "hcp_vault_secrets_app" "github_syns" {
 
 resource "hcp_vault_secrets_secret" "vault_token" {
   app_name     = hcp_vault_secrets_app.github_syns.app_name
-  secret_name  = "vault_token"
+  secret_name  = "vault_token-2"
   secret_value = hcp_vault_cluster_admin_token.admin.token
 }
 

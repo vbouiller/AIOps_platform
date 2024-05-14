@@ -49,3 +49,9 @@ variable "hvs_app_name" {
   type        = string
   default     = "githubsync"
 }
+
+variable "hcp_api_version" {
+  description = "Version string of the HCP api to use. Defaults to 2023-06-13"
+  type = string
+  default = "2023-06-13"
+}
