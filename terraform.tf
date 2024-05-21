@@ -32,7 +32,7 @@ terraform {
 provider "hcp" {}
 
 provider "vault" {
-  address   = hcp_vault_cluster.vault.public_endpoint
+  address   = hcp_vault_cluster.vault.vault_public_endpoint_url
   token     = hcp_vault_cluster_admin_token.admin.token
   namespace = var.vault_namespace
 }

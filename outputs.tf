@@ -4,7 +4,7 @@ output "vault_admin_token" {
 }
 
 output "vault_cluster_adress" {
-  value = hcp_vault_cluster.vault.public_endpoint
+  value = hcp_vault_cluster.vault.vault_public_endpoint_url
 }
 
 output "vault_cluster_namespace" {
