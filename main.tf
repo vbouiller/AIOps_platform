@@ -36,3 +36,11 @@ resource "hcp_vault_secrets_secret" "vault_token" {
   secret_value = hcp_vault_cluster_admin_token.admin.token
 }
 
+resource "vault_policy" "agent" {
+  name   = "agent"
+  policy = <<EOT
+path "kv/openai" {
+    capabilities = ["list", "read"]
+}
+EOT
+}
