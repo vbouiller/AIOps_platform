@@ -39,8 +39,8 @@ resource "hcp_vault_secrets_secret" "vault_token" {
 resource "vault_policy" "agent" {
   name   = "agent"
   policy = <<EOT
-path "kv/openai" {
-    capabilities = ["list", "read"]
+path "kv/data/openai" {
+    capabilities = ["read"]
 }
 EOT
 }
