@@ -22,6 +22,25 @@ resource "hcp_vault_cluster" "vault" {
 }
 
 
+resource "vault_auth_backend" "azure" {
+  type        = "azure"
+  description = "Azure auth method for Vault's agent auto-auth"
+}
+resource "vault_azure_auth_backend_config" "agent" {
+  backend   = vault_auth_backend.azure.path
+
+  tenant_id     = data.environment_variable.azure_tenant_id.value
+  client_id     = data.environment_variable.azure_client_id.value
+  client_secret = data.environment_sensitive_variable.azure_client_secret.value
+  resource      = "https://management.azure.com/"
+}
+
+resource "vault_azure_auth_backend_role" "agent" {
+  backend = vault_auth_backend.azure.path
+  role = "agent"
+  token_policies = [ "default", "agent" ]
+}
+
 resource "vault_policy" "agent" {
   name   = "agent"
   policy = <<EOT
