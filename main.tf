@@ -37,8 +37,10 @@ resource "vault_azure_auth_backend_config" "agent" {
 
 resource "vault_azure_auth_backend_role" "agent" {
   backend = vault_auth_backend.azure.path
+  
   role = "agent"
   token_policies = [ "default", "agent" ]
+  bound_subscription_ids = [ data.environment_variable.azure_subscription_id.value ]
 }
 
 resource "vault_policy" "agent" {
