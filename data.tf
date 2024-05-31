@@ -14,7 +14,7 @@ data "environment_sensitive_variable" "hcp_client_secret" {
 #Environement variables for Azure
 
 data "environment_variable" "azure_subscription_id" {
-  name = "SUBSCRIPTION_ID"
+  name = "ARM_SUBSCRIPTION_ID"
 }
 
 data "environment_variable" "azure_tenant_id" {
