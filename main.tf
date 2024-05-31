@@ -12,17 +12,13 @@ resource "hcp_hvn" "hvn" {
   region         = var.hvn_region
 }
 
-# Platform settings
+# Vault settings
 
 resource "hcp_vault_cluster" "vault" {
   cluster_id      = "${var.vault_id}-${random_pet.suffix.id}"
   hvn_id          = hcp_hvn.hvn.hvn_id
   tier            = var.vault_tier
   public_endpoint = var.public_endpoint
-}
-
-resource "hcp_vault_cluster_admin_token" "admin" {
-  cluster_id = hcp_vault_cluster.vault.cluster_id
 }
 
 
@@ -35,6 +31,9 @@ path "kv/data/openai" {
 EOT
 }
 
+resource "hcp_vault_cluster_admin_token" "admin" {
+  cluster_id = hcp_vault_cluster.vault.cluster_id
+}
 
 # HVS App & secret
 resource "hcp_vault_secrets_app" "github_syns" {
