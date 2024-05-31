@@ -25,6 +25,18 @@ resource "hcp_vault_cluster_admin_token" "admin" {
   cluster_id = hcp_vault_cluster.vault.cluster_id
 }
 
+
+resource "vault_policy" "agent" {
+  name   = "agent"
+  policy = <<EOT
+path "kv/data/openai" {
+    capabilities = ["read"]
+}
+EOT
+}
+
+
+# HVS App & secret
 resource "hcp_vault_secrets_app" "github_syns" {
   app_name    = var.hvs_app_name
   description = "test"
@@ -34,13 +46,4 @@ resource "hcp_vault_secrets_secret" "vault_token" {
   app_name     = hcp_vault_secrets_app.github_syns.app_name
   secret_name  = "vault_token"
   secret_value = hcp_vault_cluster_admin_token.admin.token
-}
-
-resource "vault_policy" "agent" {
-  name   = "agent"
-  policy = <<EOT
-path "kv/data/openai" {
-    capabilities = ["read"]
-}
-EOT
 }
