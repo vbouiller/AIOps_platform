@@ -21,7 +21,7 @@ resource "hcp_vault_cluster" "vault" {
   public_endpoint = var.public_endpoint
 }
 
-
+## Vault Azure Auth
 resource "vault_auth_backend" "azure" {
   type        = "azure"
   description = "Azure auth method for Vault's agent auto-auth"
@@ -43,6 +43,9 @@ resource "vault_azure_auth_backend_role" "agent" {
   bound_subscription_ids = [ data.environment_variable.azure_subscription_id.value ]
 }
 
+## Vault SSH Secret Engine
+
+## Vault Policies
 resource "vault_policy" "agent" {
   name   = "agent"
   policy = <<EOT
