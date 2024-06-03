@@ -27,7 +27,7 @@ resource "vault_auth_backend" "azure" {
   description = "Azure auth method for Vault's agent auto-auth"
 }
 resource "vault_azure_auth_backend_config" "agent" {
-  backend   = vault_auth_backend.azure.path
+  backend = vault_auth_backend.azure.path
 
   tenant_id     = data.environment_variable.azure_tenant_id.value
   client_id     = data.environment_variable.azure_client_id.value
@@ -37,13 +37,31 @@ resource "vault_azure_auth_backend_config" "agent" {
 
 resource "vault_azure_auth_backend_role" "agent" {
   backend = vault_auth_backend.azure.path
-  
-  role = "agent"
-  token_policies = [ "default", "agent" ]
-  bound_subscription_ids = [ data.environment_variable.azure_subscription_id.value ]
+
+  role                   = "agent"
+  token_policies         = ["default", "agent"]
+  bound_subscription_ids = [data.environment_variable.azure_subscription_id.value]
 }
 
 ## Vault SSH Secret Engine
+
+resource "vault_mount" "ssh" {
+  type        = "ssh"
+  path        = "ssh-client-signer"
+  description = "SSH Secret Engine"
+}
+
+resource "vault_ssh_secret_backend_ca" "ssh-ca" {
+  backend              = vault_mount.ssh.path
+  generate_signing_key = true
+}
+
+resource "vault_ssh_secret_backend_role" "ca-signer" {
+  name                    = "ca-sign"
+  backend                 = vault_mount.ssh.path
+  key_type                = "ca"
+  allow_user_certificates = true
+}
 
 ## Vault Policies
 resource "vault_policy" "agent" {
