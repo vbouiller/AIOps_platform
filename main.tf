@@ -62,6 +62,9 @@ resource "vault_ssh_secret_backend_role" "ca-signer" {
   key_type                = "ca"
   allow_user_certificates = true
   allowed_users           = "*"
+  default_extensions = {
+    "permit-pty" = ""
+  }
 }
 
 ## Vault Policies
