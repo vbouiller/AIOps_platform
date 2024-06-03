@@ -14,3 +14,7 @@ output "vault_cluster_namespace" {
 output "answer" {
   value = jsondecode(data.http.get_hvs_apps.response_body).apps[*].name
 }
+
+output "vault_ssh_ca" {
+  value = vault_ssh_secret_backend_ca.ssh-ca.public_key
+}
