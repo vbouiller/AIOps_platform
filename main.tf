@@ -67,6 +67,26 @@ resource "vault_ssh_secret_backend_role" "ca-signer" {
   }
 }
 
+## Vault KV Secret Engine
+
+resource "vault_mount" "kvv2" {
+  path        = "kv"
+  type        = "kv"
+  options     = { version = "2" }
+  description = "KVv2 for Datadog & openai information"
+}
+
+resource "vault_kv_secret_v2" "dd" {
+  mount               = vault_mount.kvv2.path
+  name                = "dd"
+  delete_all_versions = true
+  data_json = jsonencode(
+    {
+      apikey = data.environment_sensitive_variable.dd_apikey.value
+    }
+  )
+}
+
 ## Vault Policies
 resource "vault_policy" "agent" {
   name   = "agent"
