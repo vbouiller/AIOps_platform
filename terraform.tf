@@ -25,6 +25,11 @@ terraform {
       version = "0.2.6"
     }
 
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.102.0"
+    }
+
   }
 }
 
@@ -38,3 +43,7 @@ provider "vault" {
 }
 
 provider "http" {}
+
+provider "azurerm" {
+  features {}
+}

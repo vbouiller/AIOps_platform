@@ -49,3 +49,10 @@ variable "hvs_app_name" {
   type        = string
   default     = "githubsync"
 }
+
+# Azure Var
+
+variable "resource_group_location" {
+  type    = string
+  default = "francecentral"
+}
