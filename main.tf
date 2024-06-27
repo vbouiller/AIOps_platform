@@ -101,6 +101,14 @@ resource "hcp_vault_cluster_admin_token" "admin" {
   cluster_id = hcp_vault_cluster.vault.cluster_id
 }
 
+
+# Azure Resource Group for Packer Images
+
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-packer-image"
+  location = var.resource_group_location
+}
+
 # HVS App & secret
 resource "hcp_vault_secrets_app" "github_syns" {
   app_name    = var.hvs_app_name
